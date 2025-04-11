@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom"
 import { FaFacebook } from "react-icons/fa"
 import { FaInstagramSquare } from "react-icons/fa"
 import { FaSquareXTwitter } from "react-icons/fa6"
@@ -22,24 +23,47 @@ const Footer = () => {
             {/**Shop link */}
             <div>
               <h3 className="text-lg text-gray-900 mb-4">Shop</h3>
-              <ul>
-                <li to="#" className='hover:text-gray-700'>Men's Top Wear</li>
-                <li className='hover:text-gray-600'>Women's Top Wear</li>
-                <li className='hover:text-gray-600'>Men's Bottom Wear</li>
-                <li className='hover:text-gray-600'>Women's Bottom Wear</li>
-              </ul>
-            </div>
-          {/**Support link */}
-            <div>
-              <h3 className="text-lg text-gray-900 mb-4">Support</h3>
-              <ul>
-                <li to="#" className='hover:text-gray-700'>Contact Us</li>
-                <li className='hover:text-gray-600'>About Us</li>
-                <li className='hover:text-gray-600'>FAQs</li>
-                <li className='hover:text-gray-600'>Features</li>
-              </ul>
-            </div>
+              <ul className='space-y-2 text-gray-800'>
+                <li>
+                  <Link to="#" className='hover:text-gray-600 transition-colors'>Men's Top Wear</Link>
+                </li>
 
+                <li>
+                  <Link to="#" className='hover:text-gray-600 transition-colors'>Women's Top Wear</Link>
+                </li>
+
+                <li>
+                  <Link to="#" className='hover:text-gray-600 transition-colors'>Men's Bottom Wear</Link>
+                </li>
+
+                <li>
+                  <Link to="#" className='hover:text-gray-600 transition-colors'>Women's Bottom Wear</Link>
+                </li>
+              </ul>
+            </div>
+            
+          {/**Support link */}
+          <div>
+              <h3 className="text-lg text-gray-900 mb-4">Support</h3>
+              <ul className='space-y-2 text-gray-800'>
+                <li>
+                  <Link to="#" className='hover:text-gray-600 transition-colors'>Contact Us</Link>
+                </li>
+
+                <li>
+                  <Link to="#" className='hover:text-gray-600 transition-colors'>About Us</Link>
+                </li>
+
+                <li>
+                  <Link to="#" className='hover:text-gray-600 transition-colors'>FAQs</Link>
+                </li>
+
+                <li>
+                  <Link to="#" className='hover:text-gray-600 transition-colors'>Features</Link>
+                </li>
+              </ul>
+            </div>
+            
             {/**Follow us */}
             <div>
               <h3 className='text-lg text-gray-800 mb-4'>Follow Us</h3>
