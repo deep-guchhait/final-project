@@ -5,7 +5,7 @@ import { GiCash } from "react-icons/gi";
 
 const FeaturesSection = () => {
   return (
-    <section className='py-10 px-5 bg-lime-100'>
+    <section className='py-10 px-5 bg-orange-100'>
         <div className='container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center'>
             {/**Feature 1 */}
             <div className="flex flex-col items-center">

@@ -21,10 +21,10 @@ const Navbar = () => {
 
   return (
     <>
-    <nav className='container mx-auto flex items-center justify-between py-4 px-6'>
+    <nav className='container mx-auto flex items-center justify-between py-4 px-6 bg-lime-50'>
         {/**Left - Logo */}
         <div>
-            <Link to="/" className='text-2xl font-medium'>
+            <Link to="/" className='text-2xl font-semibold'>
             SDSJ Fashion
             </Link>
         </div>
@@ -54,7 +54,7 @@ const Navbar = () => {
             </Link>
             <button onClick={toggleCartDrawer} className='relative hover:text-black'>
                 <FaShoppingCart className='h-6 w-6 text-gray-800'/>
-                <span className='absolute -top-1 bg-orange-600 text-white text-xs rounded-full px-2 py-0.5'>
+                <span className='absolute -top-1 bg-orange-700 text-white text-xs rounded-full px-2 py-0.5'>
                     4
                 </span>
             </button>
@@ -82,6 +82,7 @@ const Navbar = () => {
                  <HiMiniXMark className='h-6 w-6 text-gray-800' />
                 </button>
             </div>
+            
             <div className='p-4'>
                 <h2 className='text-xl font-semibold mb-4 '>Menu</h2>
                 <nav className='space-y-4'>
