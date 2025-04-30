@@ -41,11 +41,11 @@ const handleCreateCheckout = (e) => {
     setCheckoutId(123)
 };
 
-// const handlePaymentSuccess = (details) => {
-//     console.log("Payment Successful", details);
-//     navigate("/order-confirmation");
+const handlePaymentSuccess = () => {
     
-// }
+    navigate("/order-confirmation");
+    
+}
 
   return (
     <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto py-10 px-6 tracking-tighter'>
@@ -116,8 +116,9 @@ const handleCreateCheckout = (e) => {
                         <button type='submit' className='w-full bg-black text-white py-3 rounded'>Continue to Payment</button>
                     ) : (
                         <div>
-                            <Link to="checkout/order-confirm" className="w-full bg-blue-600 text-white py-3 px-4 rounded hover:bg-blue-700 transition">Pay Now</Link>
+                            <button onClick={handlePaymentSuccess} className="w-full bg-blue-600 text-white py-3 px-4 rounded hover:bg-blue-700 transition">Pay  ₹{cart.totalPrice}</button>
                             {/**payment button component */}
+                            
                             
                         </div>
                     )}
