@@ -21,7 +21,7 @@ const Navbar = () => {
 
   return (
     <>
-    <nav className='container mx-auto flex items-center justify-between py-4 px-6 bg-lime-50'>
+    <nav className='mx-auto flex items-center justify-between py-4 px-6 bg-lime-50'>
         {/**Left - Logo */}
         <div>
             <Link to="/" className='text-2xl font-semibold'>
@@ -49,6 +49,7 @@ const Navbar = () => {
 
         {/**Right-Icons */}
         <div className='flex items-center space-x-4'>
+            <Link to="/admin" className='block bg-slate-900 px-2 rounded text-sm text-white'>Admin</Link>
             <Link to="/profile" className='hover:text-black'>
             <FaUser className='h-6 w-6 text-gray-800'/>
             </Link>
