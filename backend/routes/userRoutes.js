@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const {protect} = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -50,7 +51,53 @@ router.post("/register", async (req, res) => {
 // @desc Authenticate user
 // @acess Public
 router.post("/login", async (req, res) => {
-    
-})
+    const { email, password } = req.body;
+
+    try {
+        // Find the user by email
+        let user = await User.findOne({ email });
+
+        if(!user) 
+            return res.status(400).json({ message: "Invalid Credential" });
+
+        const isMatch = await user.matchPassword(password);
+
+        if(!isMatch) 
+            return res.status(400).json({ message: "Invalid Credential" });
+
+
+        // Create jwt Payload
+        const payload = {user: {id: user._id, role: user.role } };
+
+        // Sign and return the token along with user data
+        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "400h" }, (err, token) => {
+            if(err) throw err;
+
+            //send the user and token in response
+            res.json({
+                user: {
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    role: user.role,
+                },
+                token,
+            })
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Sever Error");
+    }
+});
+
+
+// @route GET /api/user/profile
+// @desc Get logged-in user's profile (protected route)
+// @access Private 
+
+router.get("/profile", protect, async (req, res) => {
+    res.json(req.user);
+});
 
 module.exports = router;
