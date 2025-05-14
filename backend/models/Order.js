@@ -38,7 +38,7 @@ const orderSchema = new mongoose.Schema({
     shippingAddress: {
         address: { type: String, required: true },
         city: { type: String, required: true },
-        postalCode: { type: String, required: true },
+        postalCode: { type: String, required: true, match: [/^\d{6}$/, 'Enter a valid 6-digit PIN code'] },
     },
     totalPrice: {
         type: Number,
