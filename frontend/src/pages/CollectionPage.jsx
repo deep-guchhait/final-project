@@ -3,11 +3,23 @@ import { FaFilter } from "react-icons/fa";
 import FilterSidebar from '../components/Products/FilterSidebar';
 import SortOptions from '../components/Products/SortOptions';
 import ProductGrid from '../components/Products/ProductGrid';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProductsByFilters } from '../redux/slices/productsSlice';
 
 const CollectionPage = () => {
-  const [products, setProducts] = useState([]);
+  const {collection} = useParams();
+  const [searchParams] = useSearchParams();
+  const dispatch = useDispatch();
+  const {products, loading, error} = useSelector((state) => state.products);
+  const queryParams = Object.fromEntries([...searchParams]);
+  
   const sidebarRef = useRef(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchProductsByFilters({collection, ...queryParams}));
+  }, [dispatch, collection, searchParams]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -31,37 +43,6 @@ const CollectionPage = () => {
   }, []);
 
 
-  useEffect(() => {
-    setTimeout(() => {
-      const fetchedProducts = [
-        {
-          _id: 1,
-          name: "Product 1",
-          price: 1000,
-          images : [{url: "https://picsum.photos/500/500?random=3" }],
-        },
-        {
-          _id: 2,
-          name: "Product 2",
-          price: 1000,
-          images : [{url: "https://picsum.photos/500/500?random=4" }],
-        },
-        {
-          _id: 3,
-          name: "Product 3",
-          price: 1000,
-          images : [{url: "https://picsum.photos/500/500?random=5" }],
-        },
-        {
-          _id: 4,
-          name: "Product 4",
-          price: 1000,
-          images : [{url: "https://picsum.photos/500/500?random=6" }],
-        },
-      ];
-      setProducts(fetchedProducts);
-    }, 1000)
-  }, [])
 
   return (
     <div className='flex flex-col lg:flex-row'>
@@ -82,7 +63,7 @@ const CollectionPage = () => {
         <SortOptions/>
 
         {/** Product Grid */}
-        <ProductGrid products={products} />
+        <ProductGrid products={products} loading={loading} error={error}/>
         
       </div>
 

@@ -62,7 +62,7 @@ const productsSlice = createSlice({
     name: "products",
     initialState: {
         products: [],
-        selectedProducts: null,
+        selectedProduct: null,
         similarProducts: [],
         loading: false,
         error: null,
@@ -120,7 +120,7 @@ const productsSlice = createSlice({
         })
         .addCase(fetchProductDetails.fulfilled, (state, action) => {
             state.loading = false;
-            state.selectedProducts = action.payload;
+            state.selectedProduct = action.payload;
         })
         .addCase(fetchProductDetails.rejected, (state, action) => {
             state.loading = false;
@@ -152,7 +152,7 @@ const productsSlice = createSlice({
         })
         .addCase(fetchSimilarProducts.fulfilled, (state, action) => {
             state.loading = false;
-            state.products = action.payload;
+            state.similarProducts = action.payload;
         })
         .addCase(fetchSimilarProducts.rejected, (state, action) => {
             state.loading = false;

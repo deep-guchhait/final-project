@@ -1,30 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 
 
-const cart = {
-    products: [
-        {
-            name: "Stylish Jacket",
-            size: "M",
-            color: "black",
-            price: 120,
-            image: "https://picsum.photos/150?random=1"
-        },
-        {
-            name: "Casul Sneakers",
-            size: "42",
-            color: "White",
-            price: 75,
-            image: "https://picsum.photos/150?random=2"
-        },
-    ],
-    totalPrice: 195,
-};
 
 const Checkout = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {cart, loading, error} = useSelector((state) => state.cart);
+    const {user} = useSelector((state) => state.auth);
+
+
     const [checkoutId, setCheckoutId] = useState(null);
     const [ShippingAddress, SetShippingAddress] = useState({
         firstName: "",
@@ -35,6 +22,12 @@ const Checkout = () => {
         phone: "",
 
     });
+
+    useEffect(() => {
+        if(!cart || !cart.products || cart.products.length === 0) {
+            navigate("/");
+        }
+    })
 
 const handleCreateCheckout = (e) => {
     e.preventDefault();
