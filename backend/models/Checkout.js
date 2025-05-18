@@ -10,10 +10,10 @@ const checkoutItemSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    image: {
+    image: [{
         type: String,
         required: true,
-    },
+    }],
     price: {
         type: Number,
         required: true,

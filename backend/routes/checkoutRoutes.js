@@ -13,7 +13,7 @@ const router = express.Router();
 // @desc create a new chekout session
 // @access private
 router.post("/", protect, async (req, res) => {
-    const { checkoutItems, shippingAddress, totalPrice, quantity } = req.body;
+    const { checkoutItems, shippingAddress, totalPrice } = req.body;
 
     if(!checkoutItems || checkoutItems.length === 0) {
         return res.status(400).json({ message: "No items in checkout" });
