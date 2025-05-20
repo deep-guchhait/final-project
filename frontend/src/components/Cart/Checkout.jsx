@@ -41,17 +41,24 @@ const handleCreateCheckout = async (e) => {
             price: Number(product.price),  // convert string price to number
             quantity: product.quantity,
         }));
-
+        
+        
             const res = await dispatch(createCheckout({
-                checkoutItems: cart.products,
+                checkoutItems,
                 shippingAddress,
                 totalPrice: cart.totalPrice,
             }))
             if (res.payload && res.payload._id) {
                 setCheckoutId(res.payload._id)
             }
+
         } 
+
+        
 };
+
+
+
 
 const handlePaymentSuccess = async () => {
     try {

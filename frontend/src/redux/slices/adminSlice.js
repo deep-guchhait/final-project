@@ -7,7 +7,7 @@ export const fetchUsers = createAsyncThunk("admin/fetchUsers", async () => {
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/admin/users`, 
             {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem(userToken)}`,
+                    Authorization: `Bearer ${localStorage.getItem("userToken")}`,
                 },
             }
         );
@@ -20,7 +20,7 @@ export const addUser = createAsyncThunk("admin/addUser", async (userData, {rejec
         const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/admin/users`, userData, 
             {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem(userToken)}`,
+                    Authorization: `Bearer ${localStorage.getItem("userToken")}`,
                 },
             }
         );
@@ -36,7 +36,7 @@ export const updateUser = createAsyncThunk("admin/updateUser", async ({ id, name
         const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/admin/users/${id}`, { name, email, role }, 
             {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem(userToken)}`,
+                    Authorization: `Bearer ${localStorage.getItem("userToken")}`,
                 },
             }
         );
@@ -45,12 +45,12 @@ export const updateUser = createAsyncThunk("admin/updateUser", async ({ id, name
 
 // Delete a user
 export const deleteUser = createAsyncThunk("admin/deleteUser", async (id) => {
-    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/admin/users/${id}`),
+    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/admin/users/${id}`,
     {
         headers: {
-            Authorization: `Bearer ${localStorage.getItem(userToken)}`,
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
         },
-    };
+    });
     return id;
 });
 

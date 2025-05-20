@@ -1,15 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { addUser, deleteUser, fetchUsers, updateUser } from "../../redux/slices/adminSlice";
 
 const UserManagement = () => {
 
-  const users =[
-    {
-      _id:123456,
-      name: "Deep Guchhait",
-      email: "deep@gmail.com",
-      role: "admin",
-    }, 
-  ];
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const {user} = useSelector((state) => state.auth);
+  const {users, loading, error} = useSelector((state) => state.admin);
+
+  useEffect(() => {
+    if (user && user.role !== "admin") {
+      navigate("/");
+    }
+  }, [user, navigate]);
+
+
+  useEffect(() => {
+    if (user && user.role === "admin") {
+      dispatch(fetchUsers());
+    }
+  }, [dispatch, user]);
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,7 +40,8 @@ const UserManagement = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData)
+    dispatch(addUser(formData));
+
     //Reset the form after submition
     setFormData({
       name: "",
@@ -37,12 +52,12 @@ const UserManagement = () => {
   };
 
   const handleRoleChange = (userId, newRole) => {
-    console.log({id: userId, role: newRole})
+    dispatch(updateUser({id: userId, role: newRole}));
   };
 
   const handleDeleteUser = (userId) => {
     if(window.confirm("Are you sure to delete the user ?")) {
-      console.log("deleting user with ID", userId)
+      dispatch(deleteUser(userId));
     }
   }
 
@@ -56,25 +71,25 @@ const UserManagement = () => {
         <form onSubmit={handleSubmit}>
 
           <div className="mb-4">
-            <label htmlFor="" className="block text-white">Name</label>
+            <label className="block text-white">Name</label>
             <input type="text" name='name' value={formData.name} 
                     onChange={handleChange} className='w-full p-2 border rounded' required/>
           </div>
 
           <div className="mb-4">
-            <label htmlFor="" className="block text-white">Email</label>
+            <label className="block text-white">Email</label>
             <input type="email" name='email' value={formData.email} 
                     onChange={handleChange} className='w-full p-2 border rounded' required/>
           </div>
 
           <div className="mb-4">
-            <label htmlFor="" className="block text-white">Password</label>
+            <label className="block text-white">Password</label>
             <input type="password" name='password' value={formData.password} 
                     onChange={handleChange} className='w-full p-2 border rounded' required/>
           </div>
 
           <div className="mb-4">
-            <label htmlFor="" className="block text-white">Role</label>
+            <label className="block text-white">Role</label>
             <select name="role" value={formData.role} onChange={handleChange} className="w-full p-2 border rounded">
               <option value="customer">Customer</option>
               <option value="admin">Admin</option>

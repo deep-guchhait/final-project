@@ -7,7 +7,7 @@ export const fetchUserOrders = createAsyncThunk("orders/fetchUserOrders", async 
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/orders/my-orders`, 
             {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem(userToken)}`,
+                    Authorization: `Bearer ${localStorage.getItem("userToken")}`,
                 },
             }
         );
@@ -24,7 +24,7 @@ export const fetchOrderDetails = createAsyncThunk("orders/fetchOrderDetails", as
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/orders/${orderId}`, 
             {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem(userToken)}`,
+                    Authorization: `Bearer ${localStorage.getItem("userToken")}`,
                 },
             }
         );
@@ -58,7 +58,7 @@ const orderSlice = createSlice({
         })
         .addCase(fetchUserOrders.rejected, (state, action) => {
             state.loading = false;
-            state.error = action.payload.message;   
+            state.error = action.payload?.message;   
         })
 
         // Fetch order details
@@ -72,7 +72,7 @@ const orderSlice = createSlice({
         })
         .addCase(fetchOrderDetails.rejected, (state, action) => {
             state.loading = false;
-            state.error = action.payload.message;   
+            state.error = action.payload?.message;   
         })
     }
 });

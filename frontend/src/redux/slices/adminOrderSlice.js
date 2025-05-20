@@ -7,7 +7,7 @@ export const fetchAllOrders = createAsyncThunk("adminOrders/fetchAllOrders", asy
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/admin/orders`, 
             {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem(userToken)}`,
+                    Authorization: `Bearer ${localStorage.getItem("userToken")}`,
                 },
             }
         );
@@ -23,7 +23,7 @@ export const updateOrderStatus = createAsyncThunk("adminOrders/updateOrderStatus
         const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/admin/orders/${id}`, {status}, 
             {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem(userToken)}`,
+                    Authorization: `Bearer ${localStorage.getItem("userToken")}`,
                 },
             }
         );
@@ -39,7 +39,7 @@ export const deleteOrder = createAsyncThunk("adminOrders/deleteOrder", async (id
         await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/admin/orders/${id}`,
             {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem(userToken)}`,
+                    Authorization: `Bearer ${localStorage.getItem("userToken")}`,
                 },
             }
         );
@@ -79,7 +79,7 @@ const adminOrderSlice = createSlice({
         })
         .addCase(fetchAllOrders.rejected, (state, action) => {
             state.loading = false;
-            state.error = action.payload.message; 
+            state.error = action.payload?.message; 
         })
 
         // Update order Status

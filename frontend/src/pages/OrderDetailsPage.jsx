@@ -1,37 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchOrderDetails } from '../redux/slices/orderSlice';
 
 const OrderDetailsPage = () => {
     const { id } = useParams();
-    const [orderDetails, setOrderDetails] = useState(null);
+    const dispatch = useDispatch();
+    const {orderDetails, loading, error} = useSelector((state) => state.orders);
 
     useEffect(() => {
-        const mockOrderDetails = {
-            _id: id,
-            createdAt: new Date(),
-            isPaid: true,
-            isDelivered: false,
-            shippingAddress: { address: "Moyna", city: "Tamluk" },
-            orderItems: [
-                {
-                    productId: "1",
-                    name: "Jacket",
-                    price: 120,
-                    quantity : 1,
-                    image: "https://picsum.photos/150?random=1"
-                },
-                {
-                    productId: "2",
-                    name: "T-shirt",
-                    price: 120,
-                    quantity : 2,
-                    image: "https://picsum.photos/150?random=2"
-                }
+        dispatch(fetchOrderDetails(id));
+    }, [dispatch, id]);
 
-            ]
-        };
-        setOrderDetails(mockOrderDetails)
-    }, [id]);
+    if (loading) return <p>Loading...</p>
+    if (error) return <p>Error: {error}</p>
 
 
   return (
@@ -84,7 +66,7 @@ const OrderDetailsPage = () => {
                             </tr>
                         </thead>
                         <tbody className='bg-lime-50'>
-                            {orderDetails.orderItems.map((item) => (
+                            {orderDetails.orderItem.map((item) => (
                                 <tr key={item.productId} className='border-b'>
                                     <td className="py-2 px-4 flex items-center">
                                         <img src={item.image} alt={item.name} className='w-12 h-12 object-cover rounded-lg mr-4' />
