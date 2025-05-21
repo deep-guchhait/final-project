@@ -11,10 +11,10 @@ const FilterSidebar = () => {
       size: [],
       material: [],
       minPrice: 0,
-      maxPrice: 1000,
+      maxPrice: 10000,
     });
 
-    const [priceRange, setPriceRange] = useState([0, 1000]);
+    const [priceRange, setPriceRange] = useState([0, 10000]);
 
     const categories =["Top Wear", "Bottom Wear"];
 
@@ -53,10 +53,10 @@ const FilterSidebar = () => {
         size: params.size? params.size.split(",") : [],
         material: params.material? params.material.split(",") : [],
         minPrice: params.minPrice || 0,
-        maxPrice: params.maxPrice || 1000
+        maxPrice: params.maxPrice || 10000
       });
 
-      setPriceRange([0, params.maxPrice || 1000]);
+      setPriceRange([0, params.maxPrice || 10000]);
     }, [searchParams]);
 
     const handleFilterChange = (e) => {
@@ -174,7 +174,7 @@ const FilterSidebar = () => {
       {/**Price Range Filter */}
       <div className="mb-8">
         <label className='block text-gray-700 font-medium mb-2'>Price Range</label>
-        <input type="range" name='priceRange' min={0} max={1000}
+        <input type="range" name='priceRange' min={0} max={10000}
                value={priceRange[1]}
                onChange={handlePriceChange}
                className='w-full h-2 bg-gray-400 rounded-lg appearance-none cursor-pointer' />
@@ -188,4 +188,4 @@ const FilterSidebar = () => {
   )
 }
 
-export default FilterSidebar
+export default FilterSidebar;
