@@ -55,9 +55,14 @@ const Login = () => {
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="" className="block text-sm font-semibold mb-2">Password</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} 
+                    <label className="block text-sm font-semibold mb-2">Password</label>
+                    <input id='password' type="password" value={password} onChange={(e) => setPassword(e.target.value)} 
                     className='w-full p-2 border rounded' placeholder='Enter your password' />
+                    {password && password.length < 6 && (
+                        <p className="text-red-500 text-sm mt-1">
+                            Password should be at least 6 characters
+                        </p>
+                        )}
                 </div>
 
                 <button type='submit' className='w-full bg-blue-700 text-white p-2 rounded-lg font-semibold hover:bg-blue-500 transition'>Sign In</button>

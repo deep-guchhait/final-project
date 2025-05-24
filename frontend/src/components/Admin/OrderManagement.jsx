@@ -39,7 +39,7 @@ const OrderManagement = () => {
                 <thead className='bg-orange-100 text-xs uppercase text-gray-700'>
                     <tr>
                         <th className='px-3 py-4'>Order Id</th>
-                        
+                        <th className='px-3 py-4'>User</th>
                         <th className='px-3 py-4'>Total Price</th>
                         <th className='px-3 py-4'>Status</th>
                         <th className='px-3 py-4'>Actions</th>
@@ -53,6 +53,7 @@ const OrderManagement = () => {
                                 <td className="py-4 px-4 font-medium text-gray-900 whitespace-nowrap">
                                     #{order._id}
                                 </td>
+                                <td className="p-4">{order.user?.name}</td>
                                 <td className="p-4">{order.totalPrice}</td>
                                 <td className="p-4">
                                     <select value={order.status} onChange={(e) => handleStatusChange(order._id, e.target.value)} 

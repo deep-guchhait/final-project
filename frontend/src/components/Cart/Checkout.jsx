@@ -40,6 +40,8 @@ const handleCreateCheckout = async (e) => {
             image: Array.isArray(product.image) ? product.image[0] : product.image, // first image if array
             price: Number(product.price),  // convert string price to number
             quantity: product.quantity,
+            size: product.size,
+            color: product.color
         }));
         
         

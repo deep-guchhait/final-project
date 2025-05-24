@@ -65,6 +65,11 @@ const Register = () => {
                     <label htmlFor="" className="block text-sm font-semibold mb-2">Password</label>
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} 
                     className='w-full p-2 border rounded' placeholder='Enter your password' />
+                    {password && password.length < 6 && (
+                        <p className="text-red-500 text-sm mt-1">
+                            Password should be at least 6 characters
+                        </p>
+                        )}
                 </div>
 
                 <button type='submit' 
